@@ -1,6 +1,14 @@
 <?php
+	include('lib_timezones/lib_timezones.php');
+
 	chdir(dirname(__FILE__).'/lib_timezones');
 	$sha = trim(shell_exec('git rev-parse HEAD'));
+
+	$raw_list = timezones_list();
+	$list = array();
+	foreach ($raw_list as $row){
+		$list[$row[1]] = $row;
+	}
 ?>
 <html>
 <head>
@@ -9,19 +17,29 @@
 <script src="/lib_timezones/lib_timezones.js"></script>
 <script>
 
+var zonedata = <?php echo json_encode($list); ?>;
+
 $(function(){
 
 	var t0 = performance.now();
 	var guess = timezones_guess();
 	var t1 = performance.now();
-	var label = '???';
-	var list = timezones_list();
-	for (var i=0; i<list.length; i++){
-		if (list[i][1] == guess) label = list[i][0];
-	}
+
+	var label = zonedata[guess][0];
 
 	$('#guess-name').text(label);
 	$('#guess-zone').text(guess);
+
+	$('#label-reg').text(zonedata[guess][3]);
+	$('#label-dst').text(zonedata[guess][4]);
+
+	if (zonedata[guess][4]){
+		$('#dst-yes').show();
+		$('#dst-no').hide();
+	}else{
+		$('#dst-yes').hide();
+		$('#dst-no').show();
+	}
 
 	//$('#detect').html("<p>Guess: "+label+" ("+guess+")</p>" + 
 	//	"<p>Guess took "+(Math.round(t1-t0))+"ms</p>");
@@ -54,6 +72,11 @@ $(function(){
 
 #zone {
 	font-size: 80%;
+	margin-bottom: 0.5em;
+}
+
+#label-reg, #label-dst {
+	font-weight: bold;
 }
 
 </style>
@@ -65,9 +88,12 @@ $(function(){
 	<h1>timezone.help</h1>
 
 	<div id="detect">
-		We think your timezone is:
+		We have detected your timezone as:
 		<div id="guess-name"></div>
 		<div id="zone">(Zone ID: <span id="guess-zone"></span>)</div>
+		The label for this timezone is <span id="label-reg"></span><br />
+		<span id="dst-yes">During daylight savings, the label is <span id="label-dst"></span><br /></span>
+		<span id="dst-no">This timezone does not observe daylight savings.<br /></span>
 	</div>
 
 	<p>
