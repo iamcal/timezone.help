@@ -81,7 +81,7 @@ $(function(){
 
 		We have detected your timezone as:
 		<h1 id="guess-name"></h1>
-		<div id="zone">(Zone ID: <span id="guess-zone"></span>)</div>
+		<div id="zone">(IANA ID: <span id="guess-zone"></span>)</div>
 		The label for this timezone is <span id="label-reg"></span><br />
 		<span id="dst-yes">During daylight savings, the label is <span id="label-dst"></span><br /></span>
 		<span id="dst-no">This timezone does not observe daylight savings.<br /></span>
