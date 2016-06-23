@@ -1,0 +1,3 @@
+[submodule "www/lib_timezones"]
+	path = www/lib_timezones
+	url = git@github.com:iamcal/lib_timezones.git
