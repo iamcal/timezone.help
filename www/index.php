@@ -69,8 +69,6 @@ $(function(){
 	<div class="header clearfix">
 		<nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/about">About</a></li>
             <li role="presentation"><a href="https://github.com/iamcal/lib_timezones">Source Code</a></li>
           </ul>
 		</nav>
@@ -91,7 +89,6 @@ $(function(){
         <div class="col-lg-6">
           <h4>Subheading</h4>
 	<p>
-		<a href="https://github.com/iamcal/lib_timezones">Source on GitHub</a><br />
 		Git rev: <?php echo substr($sha, 0, 10); ?>
 	</p>
 
