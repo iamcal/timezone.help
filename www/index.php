@@ -36,7 +36,12 @@ var zonedata = <?php echo json_encode($list); ?>;
 $(function(){
 
 	var t0 = performance.now();
-	var guess = timezones_guess();
+
+	var tz = new TimezoneDetector();
+	var ret = tz.detect({});
+	console.log(ret);
+	var guess = ret.zoneId;
+
 	var t1 = performance.now();
 
 	var label = zonedata[guess][0];
@@ -54,6 +59,8 @@ $(function(){
 		$('#dst-yes').hide();
 		$('#dst-no').show();
 	}
+
+	$('#debug').text(JSON.stringify(ret));
 
 	//$('#detect').html("<p>Guess: "+label+" ("+guess+")</p>" + 
 	//	"<p>Guess took "+(Math.round(t1-t0))+"ms</p>");
@@ -86,28 +93,15 @@ $(function(){
 	</div>
 
       <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
+        <div class="col-lg-12">
+          <h4>Code version</h4>
 	<p>
 		Git rev: <?php echo substr($sha, 0, 10); ?>
 	</p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+          <h4>Matcher Output</h4>
+          <p id="debug">...</p>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
         </div>
       </div>
 
