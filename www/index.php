@@ -60,7 +60,7 @@ $(function(){
 		$('#dst-no').show();
 	}
 
-	$('#debug').text(JSON.stringify(ret));
+	$('#debug').text(JSON.stringify(ret, null, " "));
 
 	//$('#detect').html("<p>Guess: "+label+" ("+guess+")</p>" + 
 	//	"<p>Guess took "+(Math.round(t1-t0))+"ms</p>");
