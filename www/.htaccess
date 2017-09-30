@@ -1,1 +1,5 @@
 DirectoryIndex index.php
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.timezone\.help$ [NC]
+RewriteRule ^/?(.*)$ http://timezone.help/$1 [L,R=permanent]
