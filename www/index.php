@@ -2,7 +2,8 @@
 	include('lib_timezones/lib/lib_timezones.php');
 
 	chdir(dirname(__FILE__).'/lib_timezones');
-	$sha = trim(shell_exec('git rev-parse HEAD'));
+	#$sha = trim(shell_exec('git rev-parse HEAD'));
+	$sha = trim(file_get_contents('/var/www/html/timezone.help/.git/modules/www/lib_timezones/refs/heads/master'));
 
 	$raw_list = timezones_list();
 	$list = array();
